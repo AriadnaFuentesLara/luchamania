@@ -18,9 +18,9 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'c13dc6190df7720b1e0d64d229748c3a286aba6ccd0d4f159664b5b771103297'>;
+  StorageHashBase<'5982919764fc4da8a295c72fd882c13f4bf02ce2df2a8a0cfb3af7373478b3cc'>;
 export type ExecutionHash =
-  ExecutionHashBase<'026b14715826a80e07fa38ed9f6542296c71ca81c6ef0beeea8180bc9b76df25'>;
+  ExecutionHashBase<'9b586dd6f29f3be4eec5b543d455a3cfa873dd00dd1ef948bedf00931fb9380c'>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
@@ -236,11 +236,96 @@ export type FieldOutputTypes = {
   readonly public: {
     readonly Disciplina: {
       readonly activa: CodecTypes['pg/bool@1']['output'];
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly descripcion: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly nombre: CodecTypes['pg/text@1']['output'];
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    };
+    readonly Evento: {
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly descripcion: CodecTypes['pg/text@1']['output'] | null;
+      readonly fecha: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly lugar: CodecTypes['pg/text@1']['output'];
+      readonly publicado: CodecTypes['pg/bool@1']['output'];
+      readonly titulo: CodecTypes['pg/text@1']['output'];
+    };
+    readonly Horario: {
+      readonly dia: 'lunes' | 'martes' | 'miercoles' | 'jueves' | 'viernes' | 'sabado' | 'domingo';
+      readonly horaFin: CodecTypes['pg/time-string@1']['output'];
+      readonly horaInicio: CodecTypes['pg/time-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly lugar: CodecTypes['pg/text@1']['output'];
+      readonly programaId: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly Inscripcion: {
+      readonly activa: CodecTypes['pg/bool@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly fecha: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly miembroId: CodecTypes['pg/int4@1']['output'];
+      readonly programaId: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly Membresia: {
+      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly fechaInicio: CodecTypes['pg/date-string@1']['output'];
+      readonly fechaVencimiento: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly miembroId: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly Miembro: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly apellidos: CodecTypes['pg/text@1']['output'];
+      readonly cedula: CodecTypes['pg/text@1']['output'];
+      readonly consentimientoDatos: CodecTypes['pg/bool@1']['output'];
+      readonly correo: CodecTypes['pg/text@1']['output'] | null;
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly encargadoNombre: CodecTypes['pg/text@1']['output'] | null;
+      readonly encargadoTelefono: CodecTypes['pg/text@1']['output'] | null;
+      readonly fechaNacimiento: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly telefono: CodecTypes['pg/text@1']['output'] | null;
+    };
+    readonly Pago: {
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly inscripcionId: CodecTypes['pg/int4@1']['output'] | null;
+      readonly metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly miembroId: CodecTypes['pg/int4@1']['output'];
+      readonly monto: CodecTypes['pg/numeric@1']['output'];
+      readonly referenciaTilopay: CodecTypes['pg/text@1']['output'] | null;
+      readonly registradoPorId: CodecTypes['pg/int4@1']['output'] | null;
+    };
+    readonly Programa: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly disciplinaId: CodecTypes['pg/int4@1']['output'];
+      readonly edadMaxima: CodecTypes['pg/int4@1']['output'] | null;
+      readonly edadMinima: CodecTypes['pg/int4@1']['output'] | null;
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly precioMensual: CodecTypes['pg/numeric@1']['output'];
+      readonly publicoMeta: CodecTypes['pg/text@1']['output'] | null;
+    };
+    readonly Usuario: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly bloqueadoHasta: CodecTypes['pg/timestamptz-string@1']['output'] | null;
+      readonly contrasenaHash: CodecTypes['pg/text@1']['output'];
+      readonly correo: CodecTypes['pg/text@1']['output'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly intentosFallidos: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly rol: 'administrador' | 'asistente';
+      readonly ultimoAcceso: CodecTypes['pg/timestamptz-string@1']['output'] | null;
     };
   };
 };
@@ -248,11 +333,96 @@ export type FieldInputTypes = {
   readonly public: {
     readonly Disciplina: {
       readonly activa: CodecTypes['pg/bool@1']['input'];
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly descripcion: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly nombre: CodecTypes['pg/text@1']['input'];
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
+    };
+    readonly Evento: {
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly descripcion: CodecTypes['pg/text@1']['input'] | null;
+      readonly fecha: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly lugar: CodecTypes['pg/text@1']['input'];
+      readonly publicado: CodecTypes['pg/bool@1']['input'];
+      readonly titulo: CodecTypes['pg/text@1']['input'];
+    };
+    readonly Horario: {
+      readonly dia: 'lunes' | 'martes' | 'miercoles' | 'jueves' | 'viernes' | 'sabado' | 'domingo';
+      readonly horaFin: CodecTypes['pg/time-string@1']['input'];
+      readonly horaInicio: CodecTypes['pg/time-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly lugar: CodecTypes['pg/text@1']['input'];
+      readonly programaId: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly Inscripcion: {
+      readonly activa: CodecTypes['pg/bool@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly fecha: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly miembroId: CodecTypes['pg/int4@1']['input'];
+      readonly programaId: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly Membresia: {
+      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly fechaInicio: CodecTypes['pg/date-string@1']['input'];
+      readonly fechaVencimiento: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly miembroId: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly Miembro: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly apellidos: CodecTypes['pg/text@1']['input'];
+      readonly cedula: CodecTypes['pg/text@1']['input'];
+      readonly consentimientoDatos: CodecTypes['pg/bool@1']['input'];
+      readonly correo: CodecTypes['pg/text@1']['input'] | null;
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly encargadoNombre: CodecTypes['pg/text@1']['input'] | null;
+      readonly encargadoTelefono: CodecTypes['pg/text@1']['input'] | null;
+      readonly fechaNacimiento: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly telefono: CodecTypes['pg/text@1']['input'] | null;
+    };
+    readonly Pago: {
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly inscripcionId: CodecTypes['pg/int4@1']['input'] | null;
+      readonly metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly miembroId: CodecTypes['pg/int4@1']['input'];
+      readonly monto: CodecTypes['pg/numeric@1']['input'];
+      readonly referenciaTilopay: CodecTypes['pg/text@1']['input'] | null;
+      readonly registradoPorId: CodecTypes['pg/int4@1']['input'] | null;
+    };
+    readonly Programa: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly disciplinaId: CodecTypes['pg/int4@1']['input'];
+      readonly edadMaxima: CodecTypes['pg/int4@1']['input'] | null;
+      readonly edadMinima: CodecTypes['pg/int4@1']['input'] | null;
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly precioMensual: CodecTypes['pg/numeric@1']['input'];
+      readonly publicoMeta: CodecTypes['pg/text@1']['input'] | null;
+    };
+    readonly Usuario: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly bloqueadoHasta: CodecTypes['pg/timestamptz-string@1']['input'] | null;
+      readonly contrasenaHash: CodecTypes['pg/text@1']['input'];
+      readonly correo: CodecTypes['pg/text@1']['input'];
+      readonly creadoEn: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly intentosFallidos: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly rol: 'administrador' | 'asistente';
+      readonly ultimoAcceso: CodecTypes['pg/timestamptz-string@1']['input'] | null;
     };
   };
 };
@@ -260,11 +430,97 @@ export type StorageColumnTypes = {
   readonly public: {
     readonly disciplina: {
       readonly activa: CodecTypes['pg/bool@1']['output'];
-      readonly created_at: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly descripcion: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly nombre: CodecTypes['pg/text@1']['output'];
-      readonly updated_at: CodecTypes['pg/timestamptz-string@1']['output'];
+    };
+    readonly evento: {
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly descripcion: CodecTypes['pg/text@1']['output'] | null;
+      readonly fecha: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly lugar: CodecTypes['pg/text@1']['output'];
+      readonly publicado: CodecTypes['pg/bool@1']['output'];
+      readonly titulo: CodecTypes['pg/text@1']['output'];
+    };
+    readonly horario: {
+      readonly dia_semana:
+        'lunes' | 'martes' | 'miercoles' | 'jueves' | 'viernes' | 'sabado' | 'domingo';
+      readonly hora_fin: CodecTypes['pg/time-string@1']['output'];
+      readonly hora_inicio: CodecTypes['pg/time-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly lugar: CodecTypes['pg/text@1']['output'];
+      readonly programa_id: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly inscripcion: {
+      readonly activa: CodecTypes['pg/bool@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly fecha_inscripcion: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly miembro_id: CodecTypes['pg/int4@1']['output'];
+      readonly programa_id: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly membresia: {
+      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly fecha_inicio: CodecTypes['pg/date-string@1']['output'];
+      readonly fecha_vencimiento: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly miembro_id: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly miembro: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly apellidos: CodecTypes['pg/text@1']['output'];
+      readonly cedula: CodecTypes['pg/text@1']['output'];
+      readonly consentimiento_datos: CodecTypes['pg/bool@1']['output'];
+      readonly correo: CodecTypes['pg/text@1']['output'] | null;
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly encargado_nombre: CodecTypes['pg/text@1']['output'] | null;
+      readonly encargado_telefono: CodecTypes['pg/text@1']['output'] | null;
+      readonly fecha_nacimiento: CodecTypes['pg/date-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly telefono: CodecTypes['pg/text@1']['output'] | null;
+    };
+    readonly pago: {
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly inscripcion_id: CodecTypes['pg/int4@1']['output'] | null;
+      readonly metodo_pago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly miembro_id: CodecTypes['pg/int4@1']['output'];
+      readonly monto: CodecTypes['pg/numeric@1']['output'];
+      readonly referencia_tilopay: CodecTypes['pg/text@1']['output'] | null;
+      readonly registrado_por_id: CodecTypes['pg/int4@1']['output'] | null;
+    };
+    readonly programa: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly disciplina_id: CodecTypes['pg/int4@1']['output'];
+      readonly edad_maxima: CodecTypes['pg/int4@1']['output'] | null;
+      readonly edad_minima: CodecTypes['pg/int4@1']['output'] | null;
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly precio_mensual: CodecTypes['pg/numeric@1']['output'];
+      readonly publico_meta: CodecTypes['pg/text@1']['output'] | null;
+    };
+    readonly usuario: {
+      readonly activo: CodecTypes['pg/bool@1']['output'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly bloqueado_hasta: CodecTypes['pg/timestamptz-string@1']['output'] | null;
+      readonly contrasena_hash: CodecTypes['pg/text@1']['output'];
+      readonly correo: CodecTypes['pg/text@1']['output'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly intentos_fallidos: CodecTypes['pg/int4@1']['output'];
+      readonly nombre: CodecTypes['pg/text@1']['output'];
+      readonly rol: 'administrador' | 'asistente';
+      readonly ultimo_acceso: CodecTypes['pg/timestamptz-string@1']['output'] | null;
     };
   };
 };
@@ -272,11 +528,97 @@ export type StorageColumnInputTypes = {
   readonly public: {
     readonly disciplina: {
       readonly activa: CodecTypes['pg/bool@1']['input'];
-      readonly created_at: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly descripcion: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly nombre: CodecTypes['pg/text@1']['input'];
-      readonly updated_at: CodecTypes['pg/timestamptz-string@1']['input'];
+    };
+    readonly evento: {
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly descripcion: CodecTypes['pg/text@1']['input'] | null;
+      readonly fecha: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly lugar: CodecTypes['pg/text@1']['input'];
+      readonly publicado: CodecTypes['pg/bool@1']['input'];
+      readonly titulo: CodecTypes['pg/text@1']['input'];
+    };
+    readonly horario: {
+      readonly dia_semana:
+        'lunes' | 'martes' | 'miercoles' | 'jueves' | 'viernes' | 'sabado' | 'domingo';
+      readonly hora_fin: CodecTypes['pg/time-string@1']['input'];
+      readonly hora_inicio: CodecTypes['pg/time-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly lugar: CodecTypes['pg/text@1']['input'];
+      readonly programa_id: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly inscripcion: {
+      readonly activa: CodecTypes['pg/bool@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly fecha_inscripcion: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly miembro_id: CodecTypes['pg/int4@1']['input'];
+      readonly programa_id: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly membresia: {
+      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly fecha_inicio: CodecTypes['pg/date-string@1']['input'];
+      readonly fecha_vencimiento: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly miembro_id: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly miembro: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly apellidos: CodecTypes['pg/text@1']['input'];
+      readonly cedula: CodecTypes['pg/text@1']['input'];
+      readonly consentimiento_datos: CodecTypes['pg/bool@1']['input'];
+      readonly correo: CodecTypes['pg/text@1']['input'] | null;
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly encargado_nombre: CodecTypes['pg/text@1']['input'] | null;
+      readonly encargado_telefono: CodecTypes['pg/text@1']['input'] | null;
+      readonly fecha_nacimiento: CodecTypes['pg/date-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly telefono: CodecTypes['pg/text@1']['input'] | null;
+    };
+    readonly pago: {
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly inscripcion_id: CodecTypes['pg/int4@1']['input'] | null;
+      readonly metodo_pago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly miembro_id: CodecTypes['pg/int4@1']['input'];
+      readonly monto: CodecTypes['pg/numeric@1']['input'];
+      readonly referencia_tilopay: CodecTypes['pg/text@1']['input'] | null;
+      readonly registrado_por_id: CodecTypes['pg/int4@1']['input'] | null;
+    };
+    readonly programa: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly disciplina_id: CodecTypes['pg/int4@1']['input'];
+      readonly edad_maxima: CodecTypes['pg/int4@1']['input'] | null;
+      readonly edad_minima: CodecTypes['pg/int4@1']['input'] | null;
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly precio_mensual: CodecTypes['pg/numeric@1']['input'];
+      readonly publico_meta: CodecTypes['pg/text@1']['input'] | null;
+    };
+    readonly usuario: {
+      readonly activo: CodecTypes['pg/bool@1']['input'];
+      readonly actualizado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly bloqueado_hasta: CodecTypes['pg/timestamptz-string@1']['input'] | null;
+      readonly contrasena_hash: CodecTypes['pg/text@1']['input'];
+      readonly correo: CodecTypes['pg/text@1']['input'];
+      readonly creado_en: CodecTypes['pg/timestamptz-string@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly intentos_fallidos: CodecTypes['pg/int4@1']['input'];
+      readonly nombre: CodecTypes['pg/text@1']['input'];
+      readonly rol: 'administrador' | 'asistente';
+      readonly ultimo_acceso: CodecTypes['pg/timestamptz-string@1']['input'] | null;
     };
   };
 };
@@ -284,11 +626,112 @@ export type StorageColumnInputTypes = {
 export namespace Models {
   export type public_Disciplina = {
     activa: CodecTypes['pg/bool@1']['output'];
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
     descripcion: CodecTypes['pg/text@1']['output'] | null;
     id: CodecTypes['pg/int4@1']['output'];
     nombre: CodecTypes['pg/text@1']['output'];
-    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    readonly [RelationKeys]?: never;
+  };
+  export type public_Evento = {
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    descripcion: CodecTypes['pg/text@1']['output'] | null;
+    fecha: CodecTypes['pg/timestamptz-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    lugar: CodecTypes['pg/text@1']['output'];
+    publicado: CodecTypes['pg/bool@1']['output'];
+    titulo: CodecTypes['pg/text@1']['output'];
+    readonly [RelationKeys]?: never;
+  };
+  export type public_Horario = {
+    dia: 'lunes' | 'martes' | 'miercoles' | 'jueves' | 'viernes' | 'sabado' | 'domingo';
+    horaFin: CodecTypes['pg/time-string@1']['output'];
+    horaInicio: CodecTypes['pg/time-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    lugar: CodecTypes['pg/text@1']['output'];
+    programaId: CodecTypes['pg/int4@1']['output'];
+    programa: public_Programa;
+    readonly [RelationKeys]?: 'programa';
+  };
+  export type public_Inscripcion = {
+    activa: CodecTypes['pg/bool@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    fecha: CodecTypes['pg/date-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    miembroId: CodecTypes['pg/int4@1']['output'];
+    programaId: CodecTypes['pg/int4@1']['output'];
+    miembro: public_Miembro;
+    programa: public_Programa;
+    readonly [RelationKeys]?: 'miembro' | 'programa';
+  };
+  export type public_Membresia = {
+    estado: 'activa' | 'inactiva' | 'suspendida';
+    fechaInicio: CodecTypes['pg/date-string@1']['output'];
+    fechaVencimiento: CodecTypes['pg/date-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    miembroId: CodecTypes['pg/int4@1']['output'];
+    miembro: public_Miembro;
+    readonly [RelationKeys]?: 'miembro';
+  };
+  export type public_Miembro = {
+    activo: CodecTypes['pg/bool@1']['output'];
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    apellidos: CodecTypes['pg/text@1']['output'];
+    cedula: CodecTypes['pg/text@1']['output'];
+    consentimientoDatos: CodecTypes['pg/bool@1']['output'];
+    correo: CodecTypes['pg/text@1']['output'] | null;
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    encargadoNombre: CodecTypes['pg/text@1']['output'] | null;
+    encargadoTelefono: CodecTypes['pg/text@1']['output'] | null;
+    fechaNacimiento: CodecTypes['pg/date-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    nombre: CodecTypes['pg/text@1']['output'];
+    telefono: CodecTypes['pg/text@1']['output'] | null;
+    readonly [RelationKeys]?: never;
+  };
+  export type public_Pago = {
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    estado: 'pendiente' | 'aprobado' | 'rechazado';
+    id: CodecTypes['pg/int4@1']['output'];
+    inscripcionId: CodecTypes['pg/int4@1']['output'] | null;
+    metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+    miembroId: CodecTypes['pg/int4@1']['output'];
+    monto: CodecTypes['pg/numeric@1']['output'];
+    referenciaTilopay: CodecTypes['pg/text@1']['output'] | null;
+    registradoPorId: CodecTypes['pg/int4@1']['output'] | null;
+    inscripcion: public_Inscripcion | null;
+    miembro: public_Miembro;
+    registradoPor: public_Usuario | null;
+    readonly [RelationKeys]?: 'inscripcion' | 'miembro' | 'registradoPor';
+  };
+  export type public_Programa = {
+    activo: CodecTypes['pg/bool@1']['output'];
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    disciplinaId: CodecTypes['pg/int4@1']['output'];
+    edadMaxima: CodecTypes['pg/int4@1']['output'] | null;
+    edadMinima: CodecTypes['pg/int4@1']['output'] | null;
+    id: CodecTypes['pg/int4@1']['output'];
+    nombre: CodecTypes['pg/text@1']['output'];
+    precioMensual: CodecTypes['pg/numeric@1']['output'];
+    publicoMeta: CodecTypes['pg/text@1']['output'] | null;
+    disciplina: public_Disciplina;
+    readonly [RelationKeys]?: 'disciplina';
+  };
+  export type public_Usuario = {
+    activo: CodecTypes['pg/bool@1']['output'];
+    actualizadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    bloqueadoHasta: CodecTypes['pg/timestamptz-string@1']['output'] | null;
+    contrasenaHash: CodecTypes['pg/text@1']['output'];
+    correo: CodecTypes['pg/text@1']['output'];
+    creadoEn: CodecTypes['pg/timestamptz-string@1']['output'];
+    id: CodecTypes['pg/int4@1']['output'];
+    intentosFallidos: CodecTypes['pg/int4@1']['output'];
+    nombre: CodecTypes['pg/text@1']['output'];
+    rol: 'administrador' | 'asistente';
+    ultimoAcceso: CodecTypes['pg/timestamptz-string@1']['output'] | null;
     readonly [RelationKeys]?: never;
   };
 }
@@ -296,6 +739,14 @@ export namespace Models {
 export declare const models: {
   public: {
     Disciplina: Models.public_Disciplina;
+    Evento: Models.public_Evento;
+    Horario: Models.public_Horario;
+    Inscripcion: Models.public_Inscripcion;
+    Membresia: Models.public_Membresia;
+    Miembro: Models.public_Miembro;
+    Pago: Models.public_Pago;
+    Programa: Models.public_Programa;
+    Usuario: Models.public_Usuario;
   };
 };
 
@@ -329,7 +780,13 @@ type ContractBase = Omit<
                   };
                   readonly many: false;
                 };
-                readonly created_at: {
+                readonly actualizado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly creado_en: {
                   readonly dataType: 'pg/timestamptz';
                   readonly codecId: 'pg/timestamptz-string@1';
                   readonly nullable: false;
@@ -358,15 +815,720 @@ type ContractBase = Omit<
                   readonly nullable: false;
                   readonly many: false;
                 };
-                readonly updated_at: {
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [{ readonly columns: readonly ['nombre'] }];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
+            readonly evento: {
+              columns: {
+                readonly actualizado_en: {
                   readonly dataType: 'pg/timestamptz';
                   readonly codecId: 'pg/timestamptz-string@1';
                   readonly nullable: false;
                   readonly many: false;
                 };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly descripcion: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly fecha: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly lugar: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly publicado: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', false>;
+                  };
+                  readonly many: false;
+                };
+                readonly titulo: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
               };
               primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [{ readonly columns: readonly ['nombre'] }];
+              uniques: readonly [];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
+            readonly horario: {
+              columns: {
+                readonly dia_semana: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly hora_fin: {
+                  readonly dataType: 'pg/time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly hora_inicio: {
+                  readonly dataType: 'pg/time';
+                  readonly codecId: 'pg/time-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly lugar: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly programa_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'horario_programa_id_idx_38463b5f';
+                  readonly prefix: 'horario_programa_id_idx';
+                  readonly columns: readonly ['programa_id'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'horario';
+                    readonly columns: readonly ['programa_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'programa';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly inscripcion: {
+              columns: {
+                readonly activa: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                  readonly many: false;
+                };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly fecha_inscripcion: {
+                  readonly dataType: 'pg/date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly miembro_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly programa_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'inscripcion_miembro_id_idx_39fa868b';
+                  readonly prefix: 'inscripcion_miembro_id_idx';
+                  readonly columns: readonly ['miembro_id'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'inscripcion_programa_id_idx_38463b5f';
+                  readonly prefix: 'inscripcion_programa_id_idx';
+                  readonly columns: readonly ['programa_id'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'inscripcion';
+                    readonly columns: readonly ['miembro_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'miembro';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'inscripcion';
+                    readonly columns: readonly ['programa_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'programa';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly membresia: {
+              columns: {
+                readonly estado: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/text@1', 'activa'>;
+                  };
+                  readonly many: false;
+                };
+                readonly fecha_inicio: {
+                  readonly dataType: 'pg/date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly fecha_vencimiento: {
+                  readonly dataType: 'pg/date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly miembro_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'membresia_miembro_id_idx_39fa868b';
+                  readonly prefix: 'membresia_miembro_id_idx';
+                  readonly columns: readonly ['miembro_id'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'membresia';
+                    readonly columns: readonly ['miembro_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'miembro';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly miembro: {
+              columns: {
+                readonly activo: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                  readonly many: false;
+                };
+                readonly actualizado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly apellidos: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly cedula: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly consentimiento_datos: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', false>;
+                  };
+                  readonly many: false;
+                };
+                readonly correo: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly encargado_nombre: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly encargado_telefono: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly fecha_nacimiento: {
+                  readonly dataType: 'pg/date';
+                  readonly codecId: 'pg/date-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly nombre: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly telefono: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [{ readonly columns: readonly ['cedula'] }];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
+            readonly pago: {
+              columns: {
+                readonly actualizado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly estado: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/text@1', 'pendiente'>;
+                  };
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly inscripcion_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly metodo_pago: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly miembro_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly monto: {
+                  readonly dataType: 'pg/numeric';
+                  readonly codecId: 'pg/numeric@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly referencia_tilopay: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly registrado_por_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [{ readonly columns: readonly ['referencia_tilopay'] }];
+              indexes: readonly [
+                {
+                  readonly name: 'pago_inscripcion_id_idx_ffac9b19';
+                  readonly prefix: 'pago_inscripcion_id_idx';
+                  readonly columns: readonly ['inscripcion_id'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'pago_miembro_id_idx_39fa868b';
+                  readonly prefix: 'pago_miembro_id_idx';
+                  readonly columns: readonly ['miembro_id'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'pago_registrado_por_id_idx_e861bdc6';
+                  readonly prefix: 'pago_registrado_por_id_idx';
+                  readonly columns: readonly ['registrado_por_id'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'pago';
+                    readonly columns: readonly ['miembro_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'miembro';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'pago';
+                    readonly columns: readonly ['inscripcion_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'inscripcion';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'pago';
+                    readonly columns: readonly ['registrado_por_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'usuario';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly programa: {
+              columns: {
+                readonly activo: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                  readonly many: false;
+                };
+                readonly actualizado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly disciplina_id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly edad_maxima: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly edad_minima: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly nombre: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly precio_mensual: {
+                  readonly dataType: 'pg/numeric';
+                  readonly codecId: 'pg/numeric@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly publico_meta: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'programa_disciplina_id_idx_f0eb3cd0';
+                  readonly prefix: 'programa_disciplina_id_idx';
+                  readonly columns: readonly ['disciplina_id'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'programa';
+                    readonly columns: readonly ['disciplina_id'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'disciplina';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly usuario: {
+              columns: {
+                readonly activo: {
+                  readonly dataType: 'pg/bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                  readonly many: false;
+                };
+                readonly actualizado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly bloqueado_hasta: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+                readonly contrasena_hash: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly correo: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly creado_en: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
+                  readonly many: false;
+                };
+                readonly id: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                  readonly many: false;
+                };
+                readonly intentos_fallidos: {
+                  readonly dataType: 'pg/int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/int4@1', 0>;
+                  };
+                  readonly many: false;
+                };
+                readonly nombre: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
+                readonly rol: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/text@1', 'asistente'>;
+                  };
+                  readonly many: false;
+                };
+                readonly ultimo_acceso: {
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                  readonly nullable: true;
+                  readonly many: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [{ readonly columns: readonly ['correo'] }];
               indexes: readonly [];
               foreignKeys: readonly [];
             };
@@ -415,6 +1577,17 @@ type ContractBase = Omit<
       readonly namespace: 'public' & NamespaceId;
       readonly model: 'Disciplina';
     };
+    readonly evento: { readonly namespace: 'public' & NamespaceId; readonly model: 'Evento' };
+    readonly horario: { readonly namespace: 'public' & NamespaceId; readonly model: 'Horario' };
+    readonly inscripcion: {
+      readonly namespace: 'public' & NamespaceId;
+      readonly model: 'Inscripcion';
+    };
+    readonly membresia: { readonly namespace: 'public' & NamespaceId; readonly model: 'Membresia' };
+    readonly miembro: { readonly namespace: 'public' & NamespaceId; readonly model: 'Miembro' };
+    readonly pago: { readonly namespace: 'public' & NamespaceId; readonly model: 'Pago' };
+    readonly programa: { readonly namespace: 'public' & NamespaceId; readonly model: 'Programa' };
+    readonly usuario: { readonly namespace: 'public' & NamespaceId; readonly model: 'Usuario' };
   };
   readonly domain: {
     readonly namespaces: {
@@ -426,7 +1599,14 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
               };
-              readonly createdAt: {
+              readonly actualizadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly creadoEn: {
                 readonly nullable: false;
                 readonly type: {
                   readonly kind: 'scalar';
@@ -445,8 +1625,572 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
-              readonly updatedAt: {
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'disciplina';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly activa: { readonly column: 'activa' };
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly descripcion: { readonly column: 'descripcion' };
+                readonly id: { readonly column: 'id' };
+                readonly nombre: { readonly column: 'nombre' };
+              };
+            };
+          };
+          readonly Evento: {
+            readonly fields: {
+              readonly actualizadoEn: {
                 readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly descripcion: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly fecha: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly lugar: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly publicado: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly titulo: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'evento';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly descripcion: { readonly column: 'descripcion' };
+                readonly fecha: { readonly column: 'fecha' };
+                readonly id: { readonly column: 'id' };
+                readonly lugar: { readonly column: 'lugar' };
+                readonly publicado: { readonly column: 'publicado' };
+                readonly titulo: { readonly column: 'titulo' };
+              };
+            };
+          };
+          readonly Horario: {
+            readonly fields: {
+              readonly dia: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly horaFin: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly horaInicio: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/time-string@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly lugar: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly programaId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+            };
+            readonly relations: {
+              readonly programa: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Programa';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['programaId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'horario';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly dia: { readonly column: 'dia_semana' };
+                readonly horaFin: { readonly column: 'hora_fin' };
+                readonly horaInicio: { readonly column: 'hora_inicio' };
+                readonly id: { readonly column: 'id' };
+                readonly lugar: { readonly column: 'lugar' };
+                readonly programaId: { readonly column: 'programa_id' };
+              };
+            };
+          };
+          readonly Inscripcion: {
+            readonly fields: {
+              readonly activa: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly fecha: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly miembroId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly programaId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+            };
+            readonly relations: {
+              readonly miembro: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Miembro';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['miembroId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+              readonly programa: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Programa';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['programaId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'inscripcion';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly activa: { readonly column: 'activa' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly fecha: { readonly column: 'fecha_inscripcion' };
+                readonly id: { readonly column: 'id' };
+                readonly miembroId: { readonly column: 'miembro_id' };
+                readonly programaId: { readonly column: 'programa_id' };
+              };
+            };
+          };
+          readonly Membresia: {
+            readonly fields: {
+              readonly estado: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly fechaInicio: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly fechaVencimiento: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly miembroId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+            };
+            readonly relations: {
+              readonly miembro: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Miembro';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['miembroId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'membresia';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly estado: { readonly column: 'estado' };
+                readonly fechaInicio: { readonly column: 'fecha_inicio' };
+                readonly fechaVencimiento: { readonly column: 'fecha_vencimiento' };
+                readonly id: { readonly column: 'id' };
+                readonly miembroId: { readonly column: 'miembro_id' };
+              };
+            };
+          };
+          readonly Miembro: {
+            readonly fields: {
+              readonly activo: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly actualizadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly apellidos: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly cedula: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly consentimientoDatos: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly correo: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly encargadoNombre: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly encargadoTelefono: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly fechaNacimiento: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly nombre: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly telefono: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'miembro';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly activo: { readonly column: 'activo' };
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly apellidos: { readonly column: 'apellidos' };
+                readonly cedula: { readonly column: 'cedula' };
+                readonly consentimientoDatos: { readonly column: 'consentimiento_datos' };
+                readonly correo: { readonly column: 'correo' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly encargadoNombre: { readonly column: 'encargado_nombre' };
+                readonly encargadoTelefono: { readonly column: 'encargado_telefono' };
+                readonly fechaNacimiento: { readonly column: 'fecha_nacimiento' };
+                readonly id: { readonly column: 'id' };
+                readonly nombre: { readonly column: 'nombre' };
+                readonly telefono: { readonly column: 'telefono' };
+              };
+            };
+          };
+          readonly Pago: {
+            readonly fields: {
+              readonly actualizadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly estado: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly inscripcionId: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly metodoPago: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly miembroId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly monto: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/numeric@1' };
+              };
+              readonly referenciaTilopay: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly registradoPorId: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+            };
+            readonly relations: {
+              readonly inscripcion: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Inscripcion';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: true;
+                readonly on: {
+                  readonly localFields: readonly ['inscripcionId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+              readonly miembro: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Miembro';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['miembroId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+              readonly registradoPor: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Usuario';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: true;
+                readonly on: {
+                  readonly localFields: readonly ['registradoPorId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'pago';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly estado: { readonly column: 'estado' };
+                readonly id: { readonly column: 'id' };
+                readonly inscripcionId: { readonly column: 'inscripcion_id' };
+                readonly metodoPago: { readonly column: 'metodo_pago' };
+                readonly miembroId: { readonly column: 'miembro_id' };
+                readonly monto: { readonly column: 'monto' };
+                readonly referenciaTilopay: { readonly column: 'referencia_tilopay' };
+                readonly registradoPorId: { readonly column: 'registrado_por_id' };
+              };
+            };
+          };
+          readonly Programa: {
+            readonly fields: {
+              readonly activo: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly actualizadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly disciplinaId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly edadMaxima: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly edadMinima: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly nombre: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly precioMensual: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/numeric@1' };
+              };
+              readonly publicoMeta: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: {
+              readonly disciplina: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Disciplina';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['disciplinaId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'programa';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly activo: { readonly column: 'activo' };
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly creadoEn: { readonly column: 'creado_en' };
+                readonly disciplinaId: { readonly column: 'disciplina_id' };
+                readonly edadMaxima: { readonly column: 'edad_maxima' };
+                readonly edadMinima: { readonly column: 'edad_minima' };
+                readonly id: { readonly column: 'id' };
+                readonly nombre: { readonly column: 'nombre' };
+                readonly precioMensual: { readonly column: 'precio_mensual' };
+                readonly publicoMeta: { readonly column: 'publico_meta' };
+              };
+            };
+          };
+          readonly Usuario: {
+            readonly fields: {
+              readonly activo: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
+              readonly actualizadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly bloqueadoHasta: {
+                readonly nullable: true;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly contrasenaHash: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly correo: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly creadoEn: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-string@1';
+                };
+              };
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly intentosFallidos: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly nombre: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly rol: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly ultimoAcceso: {
+                readonly nullable: true;
                 readonly type: {
                   readonly kind: 'scalar';
                   readonly codecId: 'pg/timestamptz-string@1';
@@ -455,15 +2199,20 @@ type ContractBase = Omit<
             };
             readonly relations: Record<string, never>;
             readonly storage: {
-              readonly table: 'disciplina';
+              readonly table: 'usuario';
               readonly namespaceId: 'public';
               readonly fields: {
-                readonly activa: { readonly column: 'activa' };
-                readonly createdAt: { readonly column: 'created_at' };
-                readonly descripcion: { readonly column: 'descripcion' };
+                readonly activo: { readonly column: 'activo' };
+                readonly actualizadoEn: { readonly column: 'actualizado_en' };
+                readonly bloqueadoHasta: { readonly column: 'bloqueado_hasta' };
+                readonly contrasenaHash: { readonly column: 'contrasena_hash' };
+                readonly correo: { readonly column: 'correo' };
+                readonly creadoEn: { readonly column: 'creado_en' };
                 readonly id: { readonly column: 'id' };
+                readonly intentosFallidos: { readonly column: 'intentos_fallidos' };
                 readonly nombre: { readonly column: 'nombre' };
-                readonly updatedAt: { readonly column: 'updated_at' };
+                readonly rol: { readonly column: 'rol' };
+                readonly ultimoAcceso: { readonly column: 'ultimo_acceso' };
               };
             };
           };
@@ -554,7 +2303,52 @@ type ContractBase = Omit<
           readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
           readonly ref: {
             readonly entry: 'disciplina';
-            readonly field: 'updated_at';
+            readonly field: 'actualizado_en';
+            readonly namespace: 'public';
+          };
+        },
+        {
+          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly ref: {
+            readonly entry: 'evento';
+            readonly field: 'actualizado_en';
+            readonly namespace: 'public';
+          };
+        },
+        {
+          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly ref: {
+            readonly entry: 'miembro';
+            readonly field: 'actualizado_en';
+            readonly namespace: 'public';
+          };
+        },
+        {
+          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly ref: {
+            readonly entry: 'pago';
+            readonly field: 'actualizado_en';
+            readonly namespace: 'public';
+          };
+        },
+        {
+          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly ref: {
+            readonly entry: 'programa';
+            readonly field: 'actualizado_en';
+            readonly namespace: 'public';
+          };
+        },
+        {
+          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
+          readonly ref: {
+            readonly entry: 'usuario';
+            readonly field: 'actualizado_en';
             readonly namespace: 'public';
           };
         },

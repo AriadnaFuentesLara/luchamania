@@ -39,12 +39,129 @@ enum DiaSemana {
 }
 
 model Disciplina {
-  id          Int                        @id @default(autoincrement())
-  nombre      String                     @unique
-  descripcion String?
-  activa      Boolean                    @default(true)
-  createdAt   TimestamptzString          @default(now()) @map("created_at")
-  updatedAt   temporal.updatedAtString() @map("updated_at")
+  id            Int                        @id @default(autoincrement())
+  nombre        String                     @unique
+  descripcion   String?
+  activa        Boolean                    @default(true)
+  creadoEn      TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn temporal.updatedAtString() @map("actualizado_en")
 
   @@map("disciplina")
+}
+
+model Programa {
+  id            Int                        @id @default(autoincrement())
+  nombre        String
+  disciplinaId  Int                        @map("disciplina_id")
+  disciplina    Disciplina                 @relation(fields: [disciplinaId], references: [id], onDelete: Restrict)
+  publicoMeta   String?                    @map("publico_meta")
+  edadMinima    Int?                       @map("edad_minima")
+  edadMaxima    Int?                       @map("edad_maxima")
+  precioMensual Decimal                    @map("precio_mensual")
+  activo        Boolean                    @default(true)
+  creadoEn      TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn temporal.updatedAtString() @map("actualizado_en")
+
+  @@map("programa")
+}
+
+model Usuario {
+  id               Int                        @id @default(autoincrement())
+  nombre           String
+  correo           String                     @unique
+  contrasenaHash   String                     @map("contrasena_hash")
+  rol              Rol                        @default(ASISTENTE)
+  activo           Boolean                    @default(true)
+  intentosFallidos Int                        @default(0) @map("intentos_fallidos")
+  bloqueadoHasta   TimestamptzString?         @map("bloqueado_hasta")
+  ultimoAcceso     TimestamptzString?         @map("ultimo_acceso")
+  creadoEn         TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn    temporal.updatedAtString() @map("actualizado_en")
+
+  @@map("usuario")
+}
+
+model Miembro {
+  id                  Int                        @id @default(autoincrement())
+  cedula              String                     @unique
+  nombre              String
+  apellidos           String
+  fechaNacimiento     DateString                 @map("fecha_nacimiento")
+  correo              String?
+  telefono            String?
+  encargadoNombre     String?                    @map("encargado_nombre")
+  encargadoTelefono   String?                    @map("encargado_telefono")
+  consentimientoDatos Boolean                    @default(false) @map("consentimiento_datos")
+  activo              Boolean                    @default(true)
+  creadoEn            TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn       temporal.updatedAtString() @map("actualizado_en")
+
+  @@map("miembro")
+}
+
+model Horario {
+  id         Int        @id @default(autoincrement())
+  programaId Int        @map("programa_id")
+  programa   Programa   @relation(fields: [programaId], references: [id], onDelete: Cascade)
+  dia        DiaSemana  @map("dia_semana")
+  horaInicio TimeString @map("hora_inicio")
+  horaFin    TimeString @map("hora_fin")
+  lugar      String
+
+  @@map("horario")
+}
+
+model Inscripcion {
+  id         Int               @id @default(autoincrement())
+  miembroId  Int               @map("miembro_id")
+  miembro    Miembro           @relation(fields: [miembroId], references: [id], onDelete: Restrict)
+  programaId Int               @map("programa_id")
+  programa   Programa          @relation(fields: [programaId], references: [id], onDelete: Restrict)
+  fecha      DateString        @default(now()) @map("fecha_inscripcion")
+  activa     Boolean           @default(true)
+  creadoEn   TimestamptzString @default(now()) @map("creado_en")
+
+  @@map("inscripcion")
+}
+
+model Membresia {
+  id               Int             @id @default(autoincrement())
+  miembroId        Int             @map("miembro_id")
+  miembro          Miembro         @relation(fields: [miembroId], references: [id], onDelete: Restrict)
+  estado           EstadoMembresia @default(ACTIVA)
+  fechaInicio      DateString      @map("fecha_inicio")
+  fechaVencimiento DateString      @map("fecha_vencimiento")
+
+  @@map("membresia")
+}
+
+model Pago {
+  id                Int                        @id @default(autoincrement())
+  miembroId         Int                        @map("miembro_id")
+  miembro           Miembro                    @relation(fields: [miembroId], references: [id], onDelete: Restrict)
+  inscripcionId     Int?                       @map("inscripcion_id")
+  inscripcion       Inscripcion?               @relation(fields: [inscripcionId], references: [id], onDelete: SetNull)
+  metodoPago        MetodoPago                 @map("metodo_pago")
+  referenciaTilopay String?                    @unique @map("referencia_tilopay")
+  estado            EstadoPago                 @default(PENDIENTE)
+  registradoPorId   Int?                       @map("registrado_por_id")
+  registradoPor     Usuario?                   @relation(fields: [registradoPorId], references: [id], onDelete: SetNull)
+  monto             Decimal
+  creadoEn          TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn     temporal.updatedAtString() @map("actualizado_en")
+
+  @@map("pago")
+}
+
+model Evento {
+  id            Int                        @id @default(autoincrement())
+  titulo        String
+  descripcion   String?
+  fecha         TimestamptzString
+  lugar         String
+  publicado     Boolean                    @default(false)
+  creadoEn      TimestamptzString          @default(now()) @map("creado_en")
+  actualizadoEn temporal.updatedAtString() @map("actualizado_en")
+
+  @@map("evento")
 }
