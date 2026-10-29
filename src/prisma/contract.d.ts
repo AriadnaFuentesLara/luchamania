@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'4583e2aaf8f9c2cb6840de60572cec8edfaae7bf7125242be8c51d1bc305ca5b'>;
+  StorageHashBase<'c13dc6190df7720b1e0d64d229748c3a286aba6ccd0d4f159664b5b771103297'>;
 export type ExecutionHash =
   ExecutionHashBase<'026b14715826a80e07fa38ed9f6542296c71ca81c6ef0beeea8180bc9b76df25'>;
 export type ProfileHash =
@@ -371,6 +371,36 @@ type ContractBase = Omit<
               foreignKeys: readonly [];
             };
           };
+          readonly valueSet: {
+            readonly DiaSemana: {
+              readonly kind: 'valueSet';
+              readonly values: readonly [
+                'lunes',
+                'martes',
+                'miercoles',
+                'jueves',
+                'viernes',
+                'sabado',
+                'domingo',
+              ];
+            };
+            readonly EstadoMembresia: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['activa', 'inactiva', 'suspendida'];
+            };
+            readonly EstadoPago: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['pendiente', 'aprobado', 'rechazado'];
+            };
+            readonly MetodoPago: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['efectivo', 'tarjeta', 'transferencia', 'sinpe'];
+            };
+            readonly Rol: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['administrador', 'asistente'];
+            };
+          };
         };
       };
     };
@@ -436,6 +466,52 @@ type ContractBase = Omit<
                 readonly updatedAt: { readonly column: 'updated_at' };
               };
             };
+          };
+        };
+        readonly enum: {
+          readonly DiaSemana: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'LUNES'; readonly value: 'lunes' },
+              { readonly name: 'MARTES'; readonly value: 'martes' },
+              { readonly name: 'MIERCOLES'; readonly value: 'miercoles' },
+              { readonly name: 'JUEVES'; readonly value: 'jueves' },
+              { readonly name: 'VIERNES'; readonly value: 'viernes' },
+              { readonly name: 'SABADO'; readonly value: 'sabado' },
+              { readonly name: 'DOMINGO'; readonly value: 'domingo' },
+            ];
+          };
+          readonly EstadoMembresia: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'ACTIVA'; readonly value: 'activa' },
+              { readonly name: 'INACTIVA'; readonly value: 'inactiva' },
+              { readonly name: 'SUSPENDIDA'; readonly value: 'suspendida' },
+            ];
+          };
+          readonly EstadoPago: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'PENDIENTE'; readonly value: 'pendiente' },
+              { readonly name: 'APROBADO'; readonly value: 'aprobado' },
+              { readonly name: 'RECHAZADO'; readonly value: 'rechazado' },
+            ];
+          };
+          readonly MetodoPago: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'EFECTIVO'; readonly value: 'efectivo' },
+              { readonly name: 'TARJETA'; readonly value: 'tarjeta' },
+              { readonly name: 'TRANSFERENCIA'; readonly value: 'transferencia' },
+              { readonly name: 'SINPE'; readonly value: 'sinpe' },
+            ];
+          };
+          readonly Rol: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'ADMINISTRADOR'; readonly value: 'administrador' },
+              { readonly name: 'ASISTENTE'; readonly value: 'asistente' },
+            ];
           };
         };
       };

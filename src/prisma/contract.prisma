@@ -1,13 +1,50 @@
 // use prisma-8
-
-model Disciplina {
-  id          Int      @id @default(autoincrement())
-  nombre      String   @unique
-  descripcion String?
-  activa     Boolean  @default(true)
-  createdAt   TimestamptzString @default(now()) @map("created_at")
-  updatedAt   temporal.updatedAtString()  @map("updated_at")
-  @@map("disciplina")
+enum EstadoPago {
+  @@type("pg/text@1")
+  PENDIENTE = "pendiente"
+  APROBADO = "aprobado"
+  RECHAZADO = "rechazado"
 }
 
+enum Rol {
+  @@type("pg/text@1")
+  ADMINISTRADOR = "administrador"
+  ASISTENTE = "asistente"
+}
 
+enum EstadoMembresia {
+  @@type("pg/text@1")
+  ACTIVA = "activa"
+  INACTIVA = "inactiva"
+  SUSPENDIDA = "suspendida"
+}
+
+enum MetodoPago {
+  @@type("pg/text@1")
+  EFECTIVO = "efectivo"
+  TARJETA = "tarjeta"
+  TRANSFERENCIA = "transferencia"
+  SINPE = "sinpe"
+}
+
+enum DiaSemana {
+  @@type("pg/text@1")
+  LUNES = "lunes"
+  MARTES = "martes"
+  MIERCOLES = "miercoles"
+  JUEVES = "jueves"
+  VIERNES = "viernes"
+  SABADO = "sabado"
+  DOMINGO = "domingo"
+}
+
+model Disciplina {
+  id          Int                        @id @default(autoincrement())
+  nombre      String                     @unique
+  descripcion String?
+  activa      Boolean                    @default(true)
+  createdAt   TimestamptzString          @default(now()) @map("created_at")
+  updatedAt   temporal.updatedAtString() @map("updated_at")
+
+  @@map("disciplina")
+}

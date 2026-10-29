@@ -12,6 +12,109 @@
   "domain": {
     "namespaces": {
       "public": {
+        "enum": {
+          "DiaSemana": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "LUNES",
+                "value": "lunes"
+              },
+              {
+                "name": "MARTES",
+                "value": "martes"
+              },
+              {
+                "name": "MIERCOLES",
+                "value": "miercoles"
+              },
+              {
+                "name": "JUEVES",
+                "value": "jueves"
+              },
+              {
+                "name": "VIERNES",
+                "value": "viernes"
+              },
+              {
+                "name": "SABADO",
+                "value": "sabado"
+              },
+              {
+                "name": "DOMINGO",
+                "value": "domingo"
+              }
+            ]
+          },
+          "EstadoMembresia": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "ACTIVA",
+                "value": "activa"
+              },
+              {
+                "name": "INACTIVA",
+                "value": "inactiva"
+              },
+              {
+                "name": "SUSPENDIDA",
+                "value": "suspendida"
+              }
+            ]
+          },
+          "EstadoPago": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "PENDIENTE",
+                "value": "pendiente"
+              },
+              {
+                "name": "APROBADO",
+                "value": "aprobado"
+              },
+              {
+                "name": "RECHAZADO",
+                "value": "rechazado"
+              }
+            ]
+          },
+          "MetodoPago": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "EFECTIVO",
+                "value": "efectivo"
+              },
+              {
+                "name": "TARJETA",
+                "value": "tarjeta"
+              },
+              {
+                "name": "TRANSFERENCIA",
+                "value": "transferencia"
+              },
+              {
+                "name": "SINPE",
+                "value": "sinpe"
+              }
+            ]
+          },
+          "Rol": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "ADMINISTRADOR",
+                "value": "administrador"
+              },
+              {
+                "name": "ASISTENTE",
+                "value": "asistente"
+              }
+            ]
+          }
+        },
         "models": {
           "Disciplina": {
             "fields": {
@@ -153,13 +256,59 @@
                 }
               ]
             }
+          },
+          "valueSet": {
+            "DiaSemana": {
+              "kind": "valueSet",
+              "values": [
+                "lunes",
+                "martes",
+                "miercoles",
+                "jueves",
+                "viernes",
+                "sabado",
+                "domingo"
+              ]
+            },
+            "EstadoMembresia": {
+              "kind": "valueSet",
+              "values": [
+                "activa",
+                "inactiva",
+                "suspendida"
+              ]
+            },
+            "EstadoPago": {
+              "kind": "valueSet",
+              "values": [
+                "pendiente",
+                "aprobado",
+                "rechazado"
+              ]
+            },
+            "MetodoPago": {
+              "kind": "valueSet",
+              "values": [
+                "efectivo",
+                "tarjeta",
+                "transferencia",
+                "sinpe"
+              ]
+            },
+            "Rol": {
+              "kind": "valueSet",
+              "values": [
+                "administrador",
+                "asistente"
+              ]
+            }
           }
         },
         "id": "public",
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "4583e2aaf8f9c2cb6840de60572cec8edfaae7bf7125242be8c51d1bc305ca5b"
+    "storageHash": "c13dc6190df7720b1e0d64d229748c3a286aba6ccd0d4f159664b5b771103297"
   },
   "execution": {
     "executionHash": "026b14715826a80e07fa38ed9f6542296c71ca81c6ef0beeea8180bc9b76df25",
