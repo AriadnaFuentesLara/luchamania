@@ -86,8 +86,8 @@
                 "value": "activa"
               },
               {
-                "name": "INACTIVA",
-                "value": "inactiva"
+                "name": "VENCIDA",
+                "value": "vencida"
               },
               {
                 "name": "SUSPENDIDA",
@@ -120,8 +120,8 @@
                 "value": "efectivo"
               },
               {
-                "name": "TARJETA",
-                "value": "tarjeta"
+                "name": "TILOPAY",
+                "value": "tilopay"
               },
               {
                 "name": "TRANSFERENCIA",
@@ -1170,6 +1170,13 @@
         "entries": {
           "table": {
             "disciplina": {
+              "checks": [
+                {
+                  "expression": "char_length(trim(nombre)) BETWEEN 2 AND 80",
+                  "name": "disciplina_nombre_largo_54bc5a24",
+                  "prefix": "disciplina_nombre_largo"
+                }
+              ],
               "columns": {
                 "activa": {
                   "codecId": "pg/bool@1",
@@ -1285,7 +1292,17 @@
                 }
               },
               "foreignKeys": [],
-              "indexes": [],
+              "indexes": [
+                {
+                  "columns": [
+                    "publicado",
+                    "fecha"
+                  ],
+                  "name": "evento_publicado_fecha_idx_d57f8084",
+                  "prefix": "evento_publicado_fecha_idx",
+                  "unique": false
+                }
+              ],
               "primaryKey": {
                 "columns": [
                   "id"
@@ -1299,6 +1316,11 @@
                   "expression": "\"dia_semana\" IN ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo')",
                   "name": "horario_dia_semana_check_61991b05",
                   "prefix": "horario_dia_semana_check"
+                },
+                {
+                  "expression": "hora_inicio < hora_fin",
+                  "name": "horario_horas_validas_5583434d",
+                  "prefix": "horario_horas_validas"
                 }
               ],
               "columns": {
@@ -1487,14 +1509,26 @@
                   "id"
                 ]
               },
-              "uniques": []
+              "uniques": [
+                {
+                  "columns": [
+                    "miembro_id",
+                    "programa_id"
+                  ]
+                }
+              ]
             },
             "membresia": {
               "checks": [
                 {
-                  "expression": "\"estado\" IN ('activa', 'inactiva', 'suspendida')",
-                  "name": "membresia_estado_check_604c574f",
+                  "expression": "\"estado\" IN ('activa', 'vencida', 'suspendida')",
+                  "name": "membresia_estado_check_5b541304",
                   "prefix": "membresia_estado_check"
+                },
+                {
+                  "expression": "fecha_inicio <= fecha_vencimiento",
+                  "name": "membresia_fechas_validas_d373dcf1",
+                  "prefix": "membresia_fechas_validas"
                 }
               ],
               "columns": {
@@ -1575,6 +1609,18 @@
               "uniques": []
             },
             "miembro": {
+              "checks": [
+                {
+                  "expression": "consentimiento_datos",
+                  "name": "miembro_consentimiento_obligatorio_72b1259f",
+                  "prefix": "miembro_consentimiento_obligatorio"
+                },
+                {
+                  "expression": "fecha_nacimiento >= DATE '1900-01-01'",
+                  "name": "miembro_fecha_nacimiento_valida_e00cfaa0",
+                  "prefix": "miembro_fecha_nacimiento_valida"
+                }
+              ],
               "columns": {
                 "activo": {
                   "codecId": "pg/bool@1",
@@ -1681,9 +1727,14 @@
                   "prefix": "pago_estado_check"
                 },
                 {
-                  "expression": "\"metodo_pago\" IN ('efectivo', 'tarjeta', 'transferencia', 'sinpe')",
-                  "name": "pago_metodo_pago_check_6285448e",
+                  "expression": "\"metodo_pago\" IN ('efectivo', 'tilopay', 'transferencia', 'sinpe')",
+                  "name": "pago_metodo_pago_check_f9caab52",
                   "prefix": "pago_metodo_pago_check"
+                },
+                {
+                  "expression": "monto > 0",
+                  "name": "pago_monto_positivo_0793043f",
+                  "prefix": "pago_monto_positivo"
                 }
               ],
               "columns": {
@@ -1855,6 +1906,23 @@
               ]
             },
             "programa": {
+              "checks": [
+                {
+                  "expression": "edad_minima IS NULL OR edad_minima >= 0",
+                  "name": "programa_edad_minima_valida_3a321640",
+                  "prefix": "programa_edad_minima_valida"
+                },
+                {
+                  "expression": "precio_mensual >= 0",
+                  "name": "programa_precio_no_negativo_1060a409",
+                  "prefix": "programa_precio_no_negativo"
+                },
+                {
+                  "expression": "edad_minima IS NULL OR edad_maxima IS NULL OR edad_minima <= edad_maxima",
+                  "name": "programa_rango_edad_946a36ec",
+                  "prefix": "programa_rango_edad"
+                }
+              ],
               "columns": {
                 "activo": {
                   "codecId": "pg/bool@1",
@@ -1953,10 +2021,32 @@
                   "id"
                 ]
               },
-              "uniques": []
+              "uniques": [
+                {
+                  "columns": [
+                    "disciplina_id",
+                    "nombre"
+                  ]
+                }
+              ]
             },
             "usuario": {
               "checks": [
+                {
+                  "expression": "correo LIKE '%_@_%._%'",
+                  "name": "usuario_correo_formato_f505b5f9",
+                  "prefix": "usuario_correo_formato"
+                },
+                {
+                  "expression": "correo = lower(correo)",
+                  "name": "usuario_correo_minusculas_3989dcbd",
+                  "prefix": "usuario_correo_minusculas"
+                },
+                {
+                  "expression": "intentos_fallidos >= 0",
+                  "name": "usuario_intentos_no_negativos_16403d41",
+                  "prefix": "usuario_intentos_no_negativos"
+                },
                 {
                   "expression": "\"rol\" IN ('administrador', 'asistente')",
                   "name": "usuario_rol_check_a2d6c90d",
@@ -2079,7 +2169,7 @@
               "kind": "valueSet",
               "values": [
                 "activa",
-                "inactiva",
+                "vencida",
                 "suspendida"
               ]
             },
@@ -2095,7 +2185,7 @@
               "kind": "valueSet",
               "values": [
                 "efectivo",
-                "tarjeta",
+                "tilopay",
                 "transferencia",
                 "sinpe"
               ]
@@ -2113,7 +2203,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "5982919764fc4da8a295c72fd882c13f4bf02ce2df2a8a0cfb3af7373478b3cc"
+    "storageHash": "9fed80131887d9c8bfd357dc8c5b0aab618366c44a09b98618549c17098c75fe"
   },
   "execution": {
     "executionHash": "9b586dd6f29f3be4eec5b543d455a3cfa873dd00dd1ef948bedf00931fb9380c",

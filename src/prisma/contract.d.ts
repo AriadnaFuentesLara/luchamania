@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'5982919764fc4da8a295c72fd882c13f4bf02ce2df2a8a0cfb3af7373478b3cc'>;
+  StorageHashBase<'9fed80131887d9c8bfd357dc8c5b0aab618366c44a09b98618549c17098c75fe'>;
 export type ExecutionHash =
   ExecutionHashBase<'9b586dd6f29f3be4eec5b543d455a3cfa873dd00dd1ef948bedf00931fb9380c'>;
 export type ProfileHash =
@@ -269,7 +269,7 @@ export type FieldOutputTypes = {
       readonly programaId: CodecTypes['pg/int4@1']['output'];
     };
     readonly Membresia: {
-      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly estado: 'activa' | 'vencida' | 'suspendida';
       readonly fechaInicio: CodecTypes['pg/date-string@1']['output'];
       readonly fechaVencimiento: CodecTypes['pg/date-string@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
@@ -296,7 +296,7 @@ export type FieldOutputTypes = {
       readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly inscripcionId: CodecTypes['pg/int4@1']['output'] | null;
-      readonly metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly metodoPago: 'efectivo' | 'tilopay' | 'transferencia' | 'sinpe';
       readonly miembroId: CodecTypes['pg/int4@1']['output'];
       readonly monto: CodecTypes['pg/numeric@1']['output'];
       readonly referenciaTilopay: CodecTypes['pg/text@1']['output'] | null;
@@ -366,7 +366,7 @@ export type FieldInputTypes = {
       readonly programaId: CodecTypes['pg/int4@1']['input'];
     };
     readonly Membresia: {
-      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly estado: 'activa' | 'vencida' | 'suspendida';
       readonly fechaInicio: CodecTypes['pg/date-string@1']['input'];
       readonly fechaVencimiento: CodecTypes['pg/date-string@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
@@ -393,7 +393,7 @@ export type FieldInputTypes = {
       readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly inscripcionId: CodecTypes['pg/int4@1']['input'] | null;
-      readonly metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly metodoPago: 'efectivo' | 'tilopay' | 'transferencia' | 'sinpe';
       readonly miembroId: CodecTypes['pg/int4@1']['input'];
       readonly monto: CodecTypes['pg/numeric@1']['input'];
       readonly referenciaTilopay: CodecTypes['pg/text@1']['input'] | null;
@@ -464,7 +464,7 @@ export type StorageColumnTypes = {
       readonly programa_id: CodecTypes['pg/int4@1']['output'];
     };
     readonly membresia: {
-      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly estado: 'activa' | 'vencida' | 'suspendida';
       readonly fecha_inicio: CodecTypes['pg/date-string@1']['output'];
       readonly fecha_vencimiento: CodecTypes['pg/date-string@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
@@ -491,7 +491,7 @@ export type StorageColumnTypes = {
       readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly inscripcion_id: CodecTypes['pg/int4@1']['output'] | null;
-      readonly metodo_pago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly metodo_pago: 'efectivo' | 'tilopay' | 'transferencia' | 'sinpe';
       readonly miembro_id: CodecTypes['pg/int4@1']['output'];
       readonly monto: CodecTypes['pg/numeric@1']['output'];
       readonly referencia_tilopay: CodecTypes['pg/text@1']['output'] | null;
@@ -562,7 +562,7 @@ export type StorageColumnInputTypes = {
       readonly programa_id: CodecTypes['pg/int4@1']['input'];
     };
     readonly membresia: {
-      readonly estado: 'activa' | 'inactiva' | 'suspendida';
+      readonly estado: 'activa' | 'vencida' | 'suspendida';
       readonly fecha_inicio: CodecTypes['pg/date-string@1']['input'];
       readonly fecha_vencimiento: CodecTypes['pg/date-string@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
@@ -589,7 +589,7 @@ export type StorageColumnInputTypes = {
       readonly estado: 'pendiente' | 'aprobado' | 'rechazado';
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly inscripcion_id: CodecTypes['pg/int4@1']['input'] | null;
-      readonly metodo_pago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+      readonly metodo_pago: 'efectivo' | 'tilopay' | 'transferencia' | 'sinpe';
       readonly miembro_id: CodecTypes['pg/int4@1']['input'];
       readonly monto: CodecTypes['pg/numeric@1']['input'];
       readonly referencia_tilopay: CodecTypes['pg/text@1']['input'] | null;
@@ -666,7 +666,7 @@ export namespace Models {
     readonly [RelationKeys]?: 'miembro' | 'programa';
   };
   export type public_Membresia = {
-    estado: 'activa' | 'inactiva' | 'suspendida';
+    estado: 'activa' | 'vencida' | 'suspendida';
     fechaInicio: CodecTypes['pg/date-string@1']['output'];
     fechaVencimiento: CodecTypes['pg/date-string@1']['output'];
     id: CodecTypes['pg/int4@1']['output'];
@@ -696,7 +696,7 @@ export namespace Models {
     estado: 'pendiente' | 'aprobado' | 'rechazado';
     id: CodecTypes['pg/int4@1']['output'];
     inscripcionId: CodecTypes['pg/int4@1']['output'] | null;
-    metodoPago: 'efectivo' | 'tarjeta' | 'transferencia' | 'sinpe';
+    metodoPago: 'efectivo' | 'tilopay' | 'transferencia' | 'sinpe';
     miembroId: CodecTypes['pg/int4@1']['output'];
     monto: CodecTypes['pg/numeric@1']['output'];
     referenciaTilopay: CodecTypes['pg/text@1']['output'] | null;
@@ -883,7 +883,14 @@ type ContractBase = Omit<
               };
               primaryKey: { readonly columns: readonly ['id'] };
               uniques: readonly [];
-              indexes: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'evento_publicado_fecha_idx_d57f8084';
+                  readonly prefix: 'evento_publicado_fecha_idx';
+                  readonly columns: readonly ['publicado', 'fecha'];
+                  readonly unique: false;
+                },
+              ];
               foreignKeys: readonly [];
             };
             readonly horario: {
@@ -1004,7 +1011,7 @@ type ContractBase = Omit<
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
+              uniques: readonly [{ readonly columns: readonly ['miembro_id', 'programa_id'] }];
               indexes: readonly [
                 {
                   readonly name: 'inscripcion_miembro_id_idx_39fa868b';
@@ -1417,7 +1424,7 @@ type ContractBase = Omit<
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
+              uniques: readonly [{ readonly columns: readonly ['disciplina_id', 'nombre'] }];
               indexes: readonly [
                 {
                   readonly name: 'programa_disciplina_id_idx_f0eb3cd0';
@@ -1548,7 +1555,7 @@ type ContractBase = Omit<
             };
             readonly EstadoMembresia: {
               readonly kind: 'valueSet';
-              readonly values: readonly ['activa', 'inactiva', 'suspendida'];
+              readonly values: readonly ['activa', 'vencida', 'suspendida'];
             };
             readonly EstadoPago: {
               readonly kind: 'valueSet';
@@ -1556,7 +1563,7 @@ type ContractBase = Omit<
             };
             readonly MetodoPago: {
               readonly kind: 'valueSet';
-              readonly values: readonly ['efectivo', 'tarjeta', 'transferencia', 'sinpe'];
+              readonly values: readonly ['efectivo', 'tilopay', 'transferencia', 'sinpe'];
             };
             readonly Rol: {
               readonly kind: 'valueSet';
@@ -2234,7 +2241,7 @@ type ContractBase = Omit<
             readonly codecId: 'pg/text@1';
             readonly members: readonly [
               { readonly name: 'ACTIVA'; readonly value: 'activa' },
-              { readonly name: 'INACTIVA'; readonly value: 'inactiva' },
+              { readonly name: 'VENCIDA'; readonly value: 'vencida' },
               { readonly name: 'SUSPENDIDA'; readonly value: 'suspendida' },
             ];
           };
@@ -2250,7 +2257,7 @@ type ContractBase = Omit<
             readonly codecId: 'pg/text@1';
             readonly members: readonly [
               { readonly name: 'EFECTIVO'; readonly value: 'efectivo' },
-              { readonly name: 'TARJETA'; readonly value: 'tarjeta' },
+              { readonly name: 'TILOPAY'; readonly value: 'tilopay' },
               { readonly name: 'TRANSFERENCIA'; readonly value: 'transferencia' },
               { readonly name: 'SINPE'; readonly value: 'sinpe' },
             ];

@@ -15,14 +15,14 @@ enum Rol {
 enum EstadoMembresia {
   @@type("pg/text@1")
   ACTIVA = "activa"
-  INACTIVA = "inactiva"
+  VENCIDA = "vencida"
   SUSPENDIDA = "suspendida"
 }
 
 enum MetodoPago {
   @@type("pg/text@1")
   EFECTIVO = "efectivo"
-  TARJETA = "tarjeta"
+  TILOPAY = "tilopay"
   TRANSFERENCIA = "transferencia"
   SINPE = "sinpe"
 }
@@ -46,6 +46,7 @@ model Disciplina {
   creadoEn      TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn temporal.updatedAtString() @map("actualizado_en")
 
+  @@check(expression: "char_length(trim(nombre)) BETWEEN 2 AND 80", name: "disciplina_nombre_largo")
   @@map("disciplina")
 }
 
@@ -62,6 +63,11 @@ model Programa {
   creadoEn      TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn temporal.updatedAtString() @map("actualizado_en")
 
+  @@unique([disciplinaId, nombre])
+  @@index([disciplinaId])
+  @@check(expression: "precio_mensual >= 0", name: "programa_precio_no_negativo")
+  @@check(expression: "edad_minima IS NULL OR edad_minima >= 0", name: "programa_edad_minima_valida")
+  @@check(expression: "edad_minima IS NULL OR edad_maxima IS NULL OR edad_minima <= edad_maxima", name: "programa_rango_edad")
   @@map("programa")
 }
 
@@ -78,6 +84,9 @@ model Usuario {
   creadoEn         TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn    temporal.updatedAtString() @map("actualizado_en")
 
+  @@check(expression: "correo = lower(correo)", name: "usuario_correo_minusculas")
+  @@check(expression: "correo LIKE '%_@_%._%'", name: "usuario_correo_formato")
+  @@check(expression: "intentos_fallidos >= 0", name: "usuario_intentos_no_negativos")
   @@map("usuario")
 }
 
@@ -96,6 +105,8 @@ model Miembro {
   creadoEn            TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn       temporal.updatedAtString() @map("actualizado_en")
 
+  @@check(expression: "consentimiento_datos", name: "miembro_consentimiento_obligatorio")
+  @@check(expression: "fecha_nacimiento >= DATE '1900-01-01'", name: "miembro_fecha_nacimiento_valida")
   @@map("miembro")
 }
 
@@ -108,6 +119,8 @@ model Horario {
   horaFin    TimeString @map("hora_fin")
   lugar      String
 
+  @@index([programaId])
+  @@check(expression: "hora_inicio < hora_fin", name: "horario_horas_validas")
   @@map("horario")
 }
 
@@ -121,6 +134,8 @@ model Inscripcion {
   activa     Boolean           @default(true)
   creadoEn   TimestamptzString @default(now()) @map("creado_en")
 
+  @@unique([miembroId, programaId])
+  @@index([programaId])
   @@map("inscripcion")
 }
 
@@ -132,6 +147,8 @@ model Membresia {
   fechaInicio      DateString      @map("fecha_inicio")
   fechaVencimiento DateString      @map("fecha_vencimiento")
 
+  @@index([miembroId])
+  @@check(expression: "fecha_inicio <= fecha_vencimiento", name: "membresia_fechas_validas")
   @@map("membresia")
 }
 
@@ -150,6 +167,8 @@ model Pago {
   creadoEn          TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn     temporal.updatedAtString() @map("actualizado_en")
 
+  @@index([miembroId])
+  @@check(expression: "monto > 0", name: "pago_monto_positivo")
   @@map("pago")
 }
 
@@ -163,5 +182,6 @@ model Evento {
   creadoEn      TimestamptzString          @default(now()) @map("creado_en")
   actualizadoEn temporal.updatedAtString() @map("actualizado_en")
 
+  @@index([publicado, fecha])
   @@map("evento")
 }
