@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import Sidebar from "@/components/admin/Sidebar";
 import { obtenerUsuarioActual } from "@/lib/auth/dal";
+
+// El panel no debe aparecer en Google.
+export const metadata: Metadata = {
+  title: "Panel administrativo",
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminLayout({
   children,

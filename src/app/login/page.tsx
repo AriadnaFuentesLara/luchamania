@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import FormularioLogin from './FormularioLogin';
 
 export const metadata: Metadata = {
-  title: 'Iniciar sesión | Luchamanía Costa Rica',
+  title: 'Iniciar sesión',
   robots: { index: false, follow: false },
 };
 
