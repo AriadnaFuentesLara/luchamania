@@ -12,6 +12,11 @@ export function aprobarPago(pagoId: number) {
     // El "where estado = pendiente" hace que dos aprobaciones al mismo tiempo no dupliquen el mes
     const pago = await tx.orm.public.Pago.where({ id: pagoId, estado: 'pendiente' }).update({ estado: 'aprobado' });
     if (!pago) return false;
+    
+    // Un pago de un programa deja activa esa inscripción (las del sitio público nacen inactivas).
+    if (pago.inscripcionId !== null) {
+      await tx.orm.public.Inscripcion.where({ id: pago.inscripcionId }).update({ activa: true });
+    }
 
     const hoy = hoyEnCostaRica();
     const actual = await tx.orm.public.Membresia.where({ miembroId: pago.miembroId })
