@@ -1,7 +1,9 @@
 import { obtenerUsuarioActual } from "@/lib/auth/dal";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-const modulosSoloAdmin = ["disciplinas", "horarios", "reportes", "usuarios"];
+// Módulos que todavía no tienen su propia carpeta. Cualquier otro nombre da 404.
+const modulosPendientes = ["reportes", "usuarios"];
+const modulosSoloAdmin = ["reportes", "usuarios"];
 
 const estadisticas = [
   { titulo: "Miembros registrados", valor: "128", cambio: "Directorio de miembros", icono: "♙" },
@@ -22,6 +24,7 @@ export default async function ModuloPage({
       params: Promise<{ modulo: string }>;
     }) {
     const { modulo } = await params;
+        if (!modulosPendientes.includes(modulo)) notFound();
     const usuario = await obtenerUsuarioActual();
     if (modulosSoloAdmin.includes(modulo) && usuario.rol !== "administrador") {
     redirect("/admin?error=sin-permiso");
