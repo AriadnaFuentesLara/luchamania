@@ -20,7 +20,9 @@ export const obtenerUsuarioActual = cache(async (): Promise<UsuarioActual> => {
     .select('id', 'nombre', 'rol', 'activo')
     .first();
 
-  if (!usuario || !usuario.activo) redirect('/login');
+    // Cookie válida pero usuario desactivado o borrado: se borra la cookie en /salir.
+    // (Si se mandara directo a /login, el proxy vería la cookie y lo devolvería a /admin sin fin.)
+    if (!usuario || !usuario.activo) redirect('/salir');
 
   return { id: usuario.id, nombre: usuario.nombre, rol: usuario.rol };
 });

@@ -116,11 +116,17 @@ export default function Sidebar({ nombre, rol }: Props) {
             <p className="mt-1 text-xs capitalize text-gray-400">{rol}</p>
           </div>
         </div>
-                <form action={cerrarSesion} className="mt-3">
-          <button
-            type="submit"
-            className="w-full rounded-xl px-3 py-2 text-left text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
-          >
+             <Link
+                 href="/admin/cuenta"
+                 className="mt-3 block rounded-xl px-3 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
+                  >
+                 Mi cuenta
+                 </Link>
+                 <form action={cerrarSesion}>
+                 <button
+                 type="submit"
+                 className="w-full rounded-xl px-3 py-2 text-left text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
+                 >
             Cerrar sesión
           </button>
         </form>
