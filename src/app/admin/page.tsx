@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import { obtenerUsuarioActual } from "@/lib/auth/dal";
 
 const estadisticas = [
   {
@@ -55,7 +56,13 @@ const accesos = [
   },
 ];
 
-export default function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+    }: {
+      searchParams: Promise<{ error?: string }>;
+    }) {
+  await obtenerUsuarioActual();
+  const { error } = await searchParams;
   return (
     <div className="min-h-screen bg-[#f5f5f3] text-[#171717]">
       <header className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 bg-white px-6 py-5 md:px-10">
@@ -77,6 +84,11 @@ export default function AdminPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-8 md:px-10 md:py-10">
+                {error === "sin-permiso" && (
+                 <p role="alert" className="mb-6 rounded-xl bg-red-50 px-5 py-4 text-sm font-semibold text-red-700">
+                 Tu rol no tiene permiso para entrar a esa sección.
+                </p>
+                  )}
         <section className="relative overflow-hidden rounded-3xl bg-[#171717] p-7 text-white md:p-10">
           <div className="absolute -right-12 -top-20 h-64 w-64 rounded-full border-[35px] border-yellow-400/10" />
           <div className="absolute -bottom-24 right-32 h-48 w-48 rounded-full bg-yellow-400/10 blur-2xl" />

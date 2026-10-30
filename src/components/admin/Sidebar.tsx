@@ -3,8 +3,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cerrarSesion } from "@/app/login/acciones";
 
-const grupos = [
+type Enlace = { nombre: string; ruta: string; icono: string; soloAdmin?: boolean };
+
+const grupos: { titulo: string; enlaces: Enlace[] }[] = [
   {
     titulo: "GENERAL",
     enlaces: [
@@ -16,8 +19,8 @@ const grupos = [
     enlaces: [
       { nombre: "Miembros", ruta: "/admin/miembros", icono: "♙" },
       { nombre: "Inscripciones", ruta: "/admin/inscripciones", icono: "▤" },
-      { nombre: "Disciplinas", ruta: "/admin/disciplinas", icono: "◈" },
-      { nombre: "Horarios", ruta: "/admin/horarios", icono: "◷" },
+      { nombre: "Disciplinas", ruta: "/admin/disciplinas", icono: "◈", soloAdmin: true },
+      { nombre: "Horarios", ruta: "/admin/horarios", icono: "◷", soloAdmin: true },
       { nombre: "Eventos", ruta: "/admin/eventos", icono: "▣" },
     ],
   },
@@ -25,14 +28,27 @@ const grupos = [
     titulo: "ADMINISTRACIÓN",
     enlaces: [
       { nombre: "Pagos", ruta: "/admin/pagos", icono: "₡" },
-      { nombre: "Reportes", ruta: "/admin/reportes", icono: "▥" },
-      { nombre: "Usuarios", ruta: "/admin/usuarios", icono: "♧" },
+      { nombre: "Reportes", ruta: "/admin/reportes", icono: "▥", soloAdmin: true },
+      { nombre: "Usuarios", ruta: "/admin/usuarios", icono: "♧", soloAdmin: true },
     ],
   },
 ];
 
-export default function Sidebar() {
+type Props = {
+  nombre: string;
+  rol: "administrador" | "asistente";
+};
+
+export default function Sidebar({ nombre, rol }: Props) {
   const pathname = usePathname();
+
+  // Esto solo esconde los enlaces. La protección real está en cada página.
+  const gruposVisibles = grupos
+    .map((grupo) => ({
+      ...grupo,
+      enlaces: grupo.enlaces.filter((e) => !e.soloAdmin || rol === "administrador"),
+    }))
+    .filter((grupo) => grupo.enlaces.length > 0);
 
   return (
     <aside className="flex min-h-screen w-64 shrink-0 flex-col bg-[#171717] text-white">
@@ -51,7 +67,7 @@ export default function Sidebar() {
       </div>
 
       <nav className="flex-1 space-y-7 px-4 py-6">
-        {grupos.map((grupo) => (
+        {gruposVisibles.map((grupo) => (
           <div key={grupo.titulo}>
             <p className="mb-3 px-3 text-[10px] font-bold tracking-[0.2em] text-gray-500">
               {grupo.titulo}
@@ -93,13 +109,21 @@ export default function Sidebar() {
       <div className="border-t border-white/10 p-4">
         <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-400 font-black text-black">
-            LC
+            {nombre.charAt(0).toUpperCase()}
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-bold">Administración</p>
-            <p className="mt-1 text-xs text-gray-400">Modo demostración</p>
+            <p className="truncate text-sm font-bold">{nombre}</p>
+            <p className="mt-1 text-xs capitalize text-gray-400">{rol}</p>
           </div>
         </div>
+                <form action={cerrarSesion} className="mt-3">
+          <button
+            type="submit"
+            className="w-full rounded-xl px-3 py-2 text-left text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
+          >
+            Cerrar sesión
+          </button>
+        </form>
       </div>
     </aside>
   );

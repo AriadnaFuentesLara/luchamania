@@ -1,3 +1,7 @@
+import { obtenerUsuarioActual } from "@/lib/auth/dal";
+import { redirect } from "next/navigation";
+
+const modulosSoloAdmin = ["disciplinas", "horarios", "reportes", "usuarios"];
 
 const estadisticas = [
   { titulo: "Miembros registrados", valor: "128", cambio: "Directorio de miembros", icono: "♙" },
@@ -12,7 +16,16 @@ const actividad = [
   { nombre: "Andrea Morales", accion: "Inscripción a disciplina", fecha: "Ayer", estado: "En revisión" },
 ];
 
-export default function AdminPage() {
+export default async function ModuloPage({
+    params,
+    }: {
+      params: Promise<{ modulo: string }>;
+    }) {
+    const { modulo } = await params;
+    const usuario = await obtenerUsuarioActual();
+    if (modulosSoloAdmin.includes(modulo) && usuario.rol !== "administrador") {
+    redirect("/admin?error=sin-permiso");
+    }
   return (
     <div className="mx-auto max-w-7xl space-y-8">
       <header className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
